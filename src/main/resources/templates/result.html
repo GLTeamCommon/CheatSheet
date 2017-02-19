@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>We find the answer</h1>
+    <p th:text="'Your question: ' + ${request.content}" />
+    <p th:text="'Answer(Reverse question): ' + ${request.answer}" />
+    <a href="/"><input type="submit" value="New question" /></a>
+</body>
+</html>
