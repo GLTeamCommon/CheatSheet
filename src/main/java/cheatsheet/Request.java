@@ -7,7 +7,7 @@ public class Request {
     private String content;
 
     public String getAnswer() {
-        return new StringBuilder(this.content).reverse().toString();
+        return Calculator.evaluate(this.content).toString();
     }
 
     public String getContent() {

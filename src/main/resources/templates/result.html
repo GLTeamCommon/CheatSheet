@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>We find the answer</h1>
+	<h1>We have found the answer</h1>
     <p th:text="'Your question: ' + ${request.content}" />
-    <p th:text="'Answer(Reverse question): ' + ${request.answer}" />
+    <p th:text="'Answer: ' + ${request.answer}" />
     <a href="/"><input type="submit" value="New question" /></a>
 </body>
 </html>
