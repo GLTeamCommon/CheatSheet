@@ -1,13 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>CheatSheet</title>
 	<meta charset="utf-8">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
+	html, body {
+	height: 100%;
+	}
+	
     body {
-         background: #939898 url(header.png) no-repeat center top;
-            
+        background: linear-gradient(to top left, powderblue, pink) no-repeat top center;    
         font: 12px 'Lucida sans', Arial, Helvetica;
         color: #333;
         text-align: center;
@@ -19,6 +22,7 @@
     
     /*-------------------------------------*/
     
+	
     .form-wrapper {
         width: 450px;
         padding: 8px;
@@ -42,7 +46,7 @@
         background-image: linear-gradient(top, #f6f6f6, #eae8e8);
     }
     
-    .form-wrapper #search {
+    .search {
         width: 330px;
         height: 20px;
         padding: 10px 5px;
@@ -57,7 +61,7 @@
         border-radius: 3px;      
     }
     
-    .form-wrapper #search:focus {
+    .search:focus {
         outline: 0; 
         border-color: #aaa;
         -moz-box-shadow: 0 1px 1px #bbb inset;
@@ -65,22 +69,22 @@
         box-shadow: 0 1px 1px #bbb inset;  
     }
     
-    .form-wrapper #search::-webkit-input-placeholder {
+    .search::-webkit-input-placeholder {
        color: #999;
        font-weight: normal;
     }
     
-    .form-wrapper #search:-moz-placeholder {
+    .search:-moz-placeholder {
         color: #999;
         font-weight: normal;
     }
     
-    .form-wrapper #search:-ms-input-placeholder {
+    .search:-ms-input-placeholder {
         color: #999;
         font-weight: normal;
     }    
     
-    .form-wrapper #submit {
+    .submit {
         float: right;    
         border: 1px solid #00748f;
         height: 42px;
@@ -106,8 +110,8 @@
         box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
     }
       
-    .form-wrapper #submit:hover,
-    .form-wrapper #submit:focus {		
+    .submit:hover,
+    .submit:focus {		
         background-color: #23d8e8;
         background-image: -webkit-gradient(linear, left top, left bottom, from(#1ab2c0), to(#23d8e8));
         background-image: -webkit-linear-gradient(top, #1ab2c0, #23d8e8);
@@ -117,14 +121,14 @@
         background-image: linear-gradient(top, #1ab2c0, #23d8e8);
     }	
       
-    .form-wrapper #submit:active {
+    .submit:active {
         outline: 0;    
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;    
     }
       
-    .form-wrapper #submit::-moz-focus-inner {
+    .submit::-moz-focus-inner {
         border: 0;
     }
     </style>
@@ -132,11 +136,11 @@
 
 <body>
 <br><br><br><br><br><br><br><br><br><br><br><br>
-<form class="form-wrapper" action="/result.html" th:action="@{/result}" th:object="${request}" method="post">
-	<input type="text" id="search" placeholder="Your formula" th:field="*{content}" required value="">
-	<input type="submit" value="Find" id="submit">
-</form>
 
+<form class="form-wrapper" action="/result.html" th:action="@{/result}" th:object="${request}" method="post">
+	<input type="text" class="search" placeholder="Your formula" th:field="*{content}" required value="">
+	<input type="submit" value="Find" class="submit">
+</form>
 
 </body>
 </html>
