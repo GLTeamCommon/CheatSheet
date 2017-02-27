@@ -8,6 +8,7 @@
 	<h1>We have found the answer</h1>
     <p th:text="'Your question: ' + ${request.content}" />
     <p th:text="'Answer: ' + ${request.answer}" />
+    <p th:text="'Number name: ' + ${request.nameOfNumber}" />
     <a href="/"><input type="submit" value="New question" /></a>
 </body>
 </html>

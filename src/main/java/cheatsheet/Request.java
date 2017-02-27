@@ -1,21 +1,26 @@
 package cheatsheet;
-
-import java.lang.StringBuilder;
+import cheatsheet.result_analysis.number_to_name_converter.NumberToWords;
 
 public class Request {
-
     private String content;
+    private String expressionResult;
+    private NumberToWords numberToWordsConverter;
 
     public String getAnswer() {
-        return Calculator.evaluate(this.content).toString();
+        this.expressionResult = Calculator.evaluate(this.content).toString();
+        return this.expressionResult;
+    }
+
+    public String getNameOfNumber() {
+        this.numberToWordsConverter = new NumberToWords(expressionResult);
+        return this.numberToWordsConverter.getName();
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
-
 }
