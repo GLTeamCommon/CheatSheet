@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>CheatSheet</title>
-	<meta charset="utf-8">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<meta charset="utf-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet" />
     <style>
 	html, body {
-	height: 100%;
+		height: 100%;
 	}
-	
     body {
-        background: linear-gradient(to top left, powderblue, pink) no-repeat top center;    
+        background: linear-gradient(to top left, powderblue, pink) no-repeat top center;                
         font: 12px 'Lucida sans', Arial, Helvetica;
         color: #333;
         text-align: center;
@@ -19,10 +19,25 @@
     a {
         color: #2A679F;
     }
+	
+	
+	.submit {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 2px 15px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 10px
+			font-size: 16px;
+		}
+	
     
     /*-------------------------------------*/
-    
-	
+    h1{
+		font-family: 'Caveat Brush', cursive;
+	}
     .form-wrapper {
         width: 450px;
         padding: 8px;
@@ -46,7 +61,7 @@
         background-image: linear-gradient(top, #f6f6f6, #eae8e8);
     }
     
-    .search {
+    .form-wrapper #search {
         width: 330px;
         height: 20px;
         padding: 10px 5px;
@@ -61,7 +76,7 @@
         border-radius: 3px;      
     }
     
-    .search:focus {
+    .form-wrapper #search:focus {
         outline: 0; 
         border-color: #aaa;
         -moz-box-shadow: 0 1px 1px #bbb inset;
@@ -69,22 +84,22 @@
         box-shadow: 0 1px 1px #bbb inset;  
     }
     
-    .search::-webkit-input-placeholder {
+    .form-wrapper #search::-webkit-input-placeholder {
        color: #999;
        font-weight: normal;
     }
     
-    .search:-moz-placeholder {
+    .form-wrapper #search:-moz-placeholder {
         color: #999;
         font-weight: normal;
     }
     
-    .search:-ms-input-placeholder {
+    .form-wrapper #search:-ms-input-placeholder {
         color: #999;
         font-weight: normal;
     }    
     
-    .submit {
+    .form-wrapper #submit {
         float: right;    
         border: 1px solid #00748f;
         height: 42px;
@@ -110,8 +125,8 @@
         box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
     }
       
-    .submit:hover,
-    .submit:focus {		
+    .form-wrapper #submit:hover,
+    .form-wrapper #submit:focus {		
         background-color: #23d8e8;
         background-image: -webkit-gradient(linear, left top, left bottom, from(#1ab2c0), to(#23d8e8));
         background-image: -webkit-linear-gradient(top, #1ab2c0, #23d8e8);
@@ -121,26 +136,76 @@
         background-image: linear-gradient(top, #1ab2c0, #23d8e8);
     }	
       
-    .submit:active {
+    .form-wrapper #submit:active {
         outline: 0;    
         -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
         -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;    
     }
       
-    .submit::-moz-focus-inner {
+    .form-wrapper #submit::-moz-focus-inner {
         border: 0;
     }
     </style>
 </head>
 
 <body>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-
-<form class="form-wrapper" action="/result.html" th:action="@{/result}" th:object="${request}" method="post">
-	<input type="text" class="search" placeholder="Your formula" th:field="*{content}" required value="">
-	<input type="submit" value="Find" class="submit">
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<form class="form-wrapper">
+	<h1>Your formula: <br/><br/>
+	   <p th:text="${request.content}" />
+	       Answer: <br/><br/>
+	   <p th:text="${request.answer}" />
+	       Graphic: 
+    </h1>
+	
+	
+	<button id="color" type="submit" class="submit" ng-click="submit(data, questionForm)" onclick="location.href = 'index.html'">Back</button>
 </form>
+<script type="text/javascript">
+/*<![CDATA[*/
+ var getNum = function() {return Math.floor(Math.random() * 256)};
 
+ a1 = getNum(); b1 = getNum();
+       a2 = getNum(); b2 = getNum();
+       a3 = getNum(); b3 = getNum();
+       setInterval(function() {
+           var i = getNum();
+           if(i <= 42){
+               a1++; b1++;
+           }
+           if(i > 42 && i <= 84){
+               a2++; b2++;
+           }
+           if(i > 84 && i <= 126){
+               a3++; b3++;
+           }
+           if(i > 126 && i <= 168){
+               a1--; b1--;
+           }
+           if(i > 168 && i <= 210){
+               a2--; b2--;
+           }
+           if(i > 210 && i <= 256){
+               a3--; b3--;
+           }
+
+
+           if(a1+a2+a3 > 660) {
+               a1--; a2--; a3--;
+           }
+           if(b1+b2+b3 > 660) {
+               b1--; b2--; b3--;
+           }
+           if(a1+a2+a3 < 256) {
+               a1++; a2++; a3++;
+           }
+           if(b1+b2+b3 < 256) {
+               b1++; b2++; b3++;
+           }
+           document.body.style.background = 'linear-gradient(to top left, rgb(' + a1 + ',' + a2 + ',' + a3 + '), rgb(' + b1 + ',' + b2 + ',' + b3 + '))no-repeat top center';
+       }, 100);
+    /*]]>*/
+   </script>
 </body>
 </html>
