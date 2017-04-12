@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class RequestController {
+public class IndexController {
 
     @GetMapping("/")
     public String indexForm(Model model) {

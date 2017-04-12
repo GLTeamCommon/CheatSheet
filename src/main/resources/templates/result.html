@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>CheatSheet</title>
-	<meta charset="utf-8"/>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet"/>
+	<meta charset="utf-8" />
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet" />
     <style>
 	html, body {
 		height: 100%;
@@ -19,6 +19,20 @@
     a {
         color: #2A679F;
     }
+	
+	
+	.submit {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 2px 15px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			margin: 10px
+			font-size: 16px;
+		}
+	
     
     /*-------------------------------------*/
     h1{
@@ -139,14 +153,59 @@
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <form class="form-wrapper">
 	<h1>Your formula: <br/><br/>
-	<p th:text="${request.content}" />
-	Answer: <br/><br/>
-	<p th:text="${request.answer}" />
-	Number name:
-    <p th:text="${request.nameOfNumber}" />
+	   <p th:text="${request.content}" />
+	       Answer: <br/><br/>
+	   <p th:text="${request.answer}" />
+	       Graphic: 
     </h1>
+	
+	
+	<button id="color" type="submit" class="submit" ng-click="submit(data, questionForm)" onClick="history.go(-1);return true;">Back</button>
 </form>
+<script type="text/javascript">
+/*<![CDATA[*/
+ var getNum = function() {return Math.floor(Math.random() * 256)};
+
+ a1 = getNum(); b1 = getNum();
+       a2 = getNum(); b2 = getNum();
+       a3 = getNum(); b3 = getNum();
+       setInterval(function() {
+           var i = getNum();
+           if(i <= 42){
+               a1++; b1++;
+           }
+           if(i > 42 && i <= 84){
+               a2++; b2++;
+           }
+           if(i > 84 && i <= 126){
+               a3++; b3++;
+           }
+           if(i > 126 && i <= 168){
+               a1--; b1--;
+           }
+           if(i > 168 && i <= 210){
+               a2--; b2--;
+           }
+           if(i > 210 && i <= 256){
+               a3--; b3--;
+           }
 
 
+           if(a1+a2+a3 > 660) {
+               a1--; a2--; a3--;
+           }
+           if(b1+b2+b3 > 660) {
+               b1--; b2--; b3--;
+           }
+           if(a1+a2+a3 < 256) {
+               a1++; a2++; a3++;
+           }
+           if(b1+b2+b3 < 256) {
+               b1++; b2++; b3++;
+           }
+           document.body.style.background = 'linear-gradient(to top left, rgb(' + a1 + ',' + a2 + ',' + a3 + '), rgb(' + b1 + ',' + b2 + ',' + b3 + '))no-repeat top center';
+       }, 100);
+    /*]]>*/
+   </script>
 </body>
 </html>

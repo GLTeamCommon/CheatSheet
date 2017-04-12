@@ -1,33 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <title>CheatSheet</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="core_engine/scriptjava.js"></script>
     <style>
-	html, body {
-	height: 100%;
-	}
-	
-    body {
-        background: linear-gradient(to top left, powderblue, pink) no-repeat top center;    
-        font: 12px 'Lucida sans', Arial, Helvetica;
-        color: #333;
-        text-align: center;
-    }
-    
-    a {
-        color: #2A679F;
-    }
-    
-    /*-------------------------------------*/
-    
-	
-    .form-wrapper {
-        width: 450px;
-        padding: 8px;
-        margin: 100px auto;
-        overflow: hidden;
+        html, body {
+             height: 100%;
+        }
+        .form-search {
+            max-width: 500px;
+            padding: 15px;
+            margin: 0 auto;
+			 overflow: hidden;
         border-width: 1px;
         border-style: solid;
         border-color: #dedede #bababa #aaa #bababa;
@@ -44,9 +29,10 @@
         background-image: -ms-linear-gradient(top, #f6f6f6, #eae8e8);
         background-image: -o-linear-gradient(top, #f6f6f6, #eae8e8);
         background-image: linear-gradient(top, #f6f6f6, #eae8e8);
-    }
-    
-    .search {
+        }
+
+		
+		    .search {
         width: 330px;
         height: 20px;
         padding: 10px 5px;
@@ -84,63 +70,229 @@
         font-weight: normal;
     }    
     
-    .submit {
-        float: right;    
-        border: 1px solid #00748f;
-        height: 42px;
-        width: 100px;
-        padding: 0;
-        cursor: pointer;
-        font: bold 15px Arial, Helvetica;
-        color: #fafafa;
-        text-transform: uppercase;    
-        background-color: #1ab2c0;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#23d8e8), to(#1ab2c0));
-        background-image: -webkit-linear-gradient(top, #23d8e8, #1ab2c0);
-        background-image: -moz-linear-gradient(top, #23d8e8, #1ab2c0);
-        background-image: -ms-linear-gradient(top, #23d8e8, #1ab2c0);
-        background-image: -o-linear-gradient(top, #23d8e8, #1ab2c0);
-        background-image: linear-gradient(top, #23d8e8, #1ab2c0);
-        -moz-border-radius: 3px;
-        -webkit-border-radius: 3px;
-        border-radius: 3px;      
-        text-shadow: 0 1px 0 rgba(0, 0 ,0, .3);
-        -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
-        -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
-        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 0 #fff;
-    }
-      
-    .submit:hover,
-    .submit:focus {		
-        background-color: #23d8e8;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#1ab2c0), to(#23d8e8));
-        background-image: -webkit-linear-gradient(top, #1ab2c0, #23d8e8);
-        background-image: -moz-linear-gradient(top, #1ab2c0, #23d8e8);
-        background-image: -ms-linear-gradient(top, #1ab2c0, #23d8e8);
-        background-image: -o-linear-gradient(top, #1ab2c0, #23d8e8);
-        background-image: linear-gradient(top, #1ab2c0, #23d8e8);
-    }	
-      
-    .submit:active {
-        outline: 0;    
-        -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;    
-    }
-      
-    .submit::-moz-focus-inner {
-        border: 0;
-    }
+		
+		
+        .parent {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: auto;
+        }
+
+		
+
+        .blok {
+            color: #000;
+            background: #FFF;
+            cursor: pointer;
+        }
+        .search:hover {
+            background: #d0a0d0;
+            color: #000;
+        }
+         .transition {
+             transition-property: background-color;
+             transition: 3s;
+         }
+        #color {
+            color: #fff;
+            background-color: #0275d8;
+            transition-property: background-color;
+            transition-duration: 5s;
+        }
+        .block {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+		
+		
+		.submit {
+			background-color: #4CAF50; /* Green */
+			border: none;
+			color: white;
+			padding: 0px 15px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+		}
+		
     </style>
+    
+    <title>First Angular App</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" />
 </head>
-
 <body>
-<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <script type="text/javascript" src="core_engine/cartoon_image.js"></script>
+    <div class="parent">
+        <div class="block">
+            <div ng-app="App">
 
-<form class="form-wrapper" action="/result.html" th:action="@{/result}" th:object="${request}" method="post">
-	<input type="text" class="search" placeholder="Your formula" th:field="*{content}"/>
-	<input type="submit" value="Find" class="submit"/>
-</form>
+                <div ng-controller="Send">
+                    <div class = "egor_eblan" id="mainVeiw">
+                        <input type="image" onmousedown="return false" id="main"/>
+                    </div>
 
+                    <form class="form-search" name = "questionForm" onsubmit="return empty_form();" action="/result.html" th:action="@{/result}" th:object="${request}" method="post">
+                        <div class="input-append">
+                            <input id="data" type="text" class = "search transition"  ng-model="data.text"  placeholder="Input your question" th:field="*{content}" />
+                            <button id="color" type="submit" class="submit" ng-click="submit(data, questionForm)">Find</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        var empty_form = function () {
+            var txt = document.getElementById('data').value;
+            if(txt === "")
+            {
+                noGay_set();
+                return false;
+            }
+            return true;
+        };
+
+        color.onclick = function() {
+            this.style.backgroundColor = 'rgb(' + getNum() + ',' + getNum() + ',' + getNum() + ')';
+        };
+
+        var getNum = function() {return Math.floor(Math.random() * 256)};
+
+        var mainGay = new cartoon_image();
+        var gayGlass = new cartoon_image();
+        var noGay = new cartoon_image();
+
+        var stop_all = function () {
+            gayGlass.stop();
+            mainGay.stop();
+            noGay.stop();
+        };
+
+        var gayGlass_set = function() {
+            stop_all();
+            gayGlass.play({
+                id:['mainVeiw','main'],//id div элемента и img элемента
+                src:'images/gayGlass.png',//ссылка на изображение
+                frames_x:33,//количество кадров на изображении по x
+                frames_y:1,//количество кадров на изображении по y
+                width:3729,//ширина изображения
+                height:180,//высота изображения
+                fps:18,//скорость показа кадров в секунду, можно писать дробные числа
+                reverse:false,//если true то проигрывается с конца в начало
+                playandstop:true,//если true то проиграть 1 раз и передать управление функции next
+                next: function () {//выполнится только если playandstop==true
+                    gayGlass.getframe(4,1);
+                    stop_all();//сюда можно пысать следующий код который будет выполняться после завершения анимации
+                }
+            });
+        };
+
+        var noGay_set = function() {
+            stop_all();
+            noGay.play({
+                id:['mainVeiw','main'],//id div элемента и img элемента
+                src:'images/noGay.png',//ссылка на изображение
+                frames_x:13,//количество кадров на изображении по x
+                frames_y:1,//количество кадров на изображении по y
+                width:1467,//ширина изображения
+                height:180,//высота изображения
+                fps:13,//скорость показа кадров в секунду, можно писать дробные числа
+                reverse:false,//если true то проигрывается с конца в начало
+                playandstop:true,//если true то проиграть 1 раз и передать управление функции next
+                next: function () {//выполнится только если playandstop==true
+                    stop_all();//сюда можно пысать следующий код который будет выполняться после завершения анимации
+                    noGay.getframe(1,1);
+                }
+            });
+        };
+
+        var mainGay_set = function() {
+            stop_all();
+            mainGay.play({
+                id:['mainVeiw','main'],//id div элемента и img элемента
+                src:'images/gayGlass.png',//ссылка на изображение
+                frames_x:33,//количество кадров на изображении по x
+                frames_y:1,//количество кадров на изображении по y
+                width:3729,//ширина изображения
+                height:180,//высота изображения
+                fps:1,//скорость показа кадров в секунду, можно писать дробные числа
+                reverse:true,//если true то проигрывается с конца в начало
+                playandstop:false,//если true то проиграть 1 раз и передать управление функции next
+                next: function () {//выполнится только если playandstop==true
+                    //сюда можно пысать следующий код который будет выполняться после завершения анимации
+                }
+            });
+            stop_all();
+            mainGay.getframe(4,1);
+        };
+        $$r(function() {//если документ полностью загрузился выполняю код
+            //добавляю события кнопкам при нажатии
+            mainGay_set();
+            main.onclick = gayGlass_set;
+            $$e.add($$('cartoon_play_3'),'click',noGay_set);
+        });
+
+        a1 = getNum(); 
+        b1 = getNum();
+        a2 = getNum(); 
+        b2 = getNum();
+        a3 = getNum(); 
+        b3 = getNum();
+        var f = function() {
+            var i = getNum();
+            if (i <= 42) {
+                a1++; 
+                b1++;
+            }
+            if (i > 42 && i <= 84) {
+               a2++; 
+               b2++;
+            }
+            if (i > 84 && i <= 126) {
+               a3++; 
+               b3++;
+            }
+            if (i > 126 && i <= 168) {
+               a1--; 
+               b1--;
+            }
+            if (i > 168 && i <= 210) {
+               a2--; b2--;
+            }
+            if (i > 210 && i <= 256) {
+               a3--; b3--;
+            }
+
+
+            if (a1+a2+a3 > 660) {
+               a1--; a2--; a3--;
+            }
+            if (b1+b2+b3 > 660) {
+               b1--; b2--; b3--;
+            }
+            if (a1+a2+a3 < 256) {
+               a1++; a2++; a3++;
+            }
+            if (b1+b2+b3 < 256) {
+               b1++; b2++; b3++;
+            }
+            document.body.style.background = 'linear-gradient(to top left, rgb(' + a1 + ',' + a2 + ',' + a3 + '), rgb(' + b1 + ',' + b2 + ',' + b3 + '))no-repeat top center';
+        }
+        setInterval(f, 100);
+        /*]]>*/
+    </script>
+    <script type="text/javascript" src="angular-1.6.3/angular.min.js"></script>
 </body>
 </html>
