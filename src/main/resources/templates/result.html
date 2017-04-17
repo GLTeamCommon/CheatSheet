@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>CheatSheet</title>
+  <title>CheatSheet</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 	<meta charset="utf-8" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet" />
@@ -156,7 +157,28 @@
 	   <p th:text="${request.content}" />
 	       Answer: <br/><br/>
 	   <p th:text="${request.answer}" />
-	       Graphic: 
+	       Graphic:
+      <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+      <script th:inline="javascript">
+        /*<![CDATA[*/
+        var res = [[${request.answer}]]
+        var trace1 = {
+            x: [parseInt(res)],
+            y: [0],
+            mode: 'markers'
+        };
+
+        var data = [ trace1 ];
+
+        var layout = {
+            title:'Line and Scatter Plot',
+            height: 400,
+            width: 480
+        };
+
+        Plotly.newPlot('myDiv', data, layout);
+        /*]]>*/
+      </script>
     </h1>
 	
 	
