@@ -158,27 +158,30 @@
 	       Answer: <br/><br/>
 	   <p th:text="${request.answer}" />
 	       Graphic:
-      <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+      <div id="myDiv" style="width: 450px; height: 400px;">
       <script th:inline="javascript">
         /*<![CDATA[*/
         var res = [[${request.answer}]]
         var trace1 = {
-            x: [parseInt(res)],
+            x: [parseFloat(res)],
             y: [0],
-            mode: 'markers'
+            mode: 'markers',
+            marker: { 
+              size: 16,
+              color: 'rgba(22, 245, 141, 1)' },
         };
 
         var data = [ trace1 ];
 
         var layout = {
-            title:'Line and Scatter Plot',
             height: 400,
-            width: 480
+            width: 450
         };
 
         Plotly.newPlot('myDiv', data, layout);
         /*]]>*/
       </script>
+    </div>
     </h1>
 	
 	
