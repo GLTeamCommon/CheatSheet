@@ -6,9 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by ilyam on 18.04.2017.
- */
+
 public class CalculatorFunctionsTest {
 
     Calculator calc;
@@ -101,6 +99,12 @@ public class CalculatorFunctionsTest {
     public void evaluateComplexExpression1() throws Exception {
         result = calc.evaluate("ln(e^(sin(pi/6)^(-1)))");
         assertTrue(result == 2.0);
+    }
+
+    @Test
+    public void evaluateComplexExpression3() throws Exception {
+        result = calc.evaluate("2.5*e^(log(100))/cos(pi/3)");
+        assertTrue(result == 36.94528049465324);
     }
 
     @Test
