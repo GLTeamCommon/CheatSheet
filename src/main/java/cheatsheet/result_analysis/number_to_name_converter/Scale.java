@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 22.02.17.
  */
-enum Scale {
+public enum Scale {
     SHORT,
     LONG;
 

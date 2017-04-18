@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 27.02.17.
  */
-interface ScalesArray {
+public interface ScalesArray {
     ScaleUnit[] SCALE_UNITS = new ScaleUnit[]{
            new ScaleUnit(63, "vigintillion", "decilliard"),
            new ScaleUnit(60, "novemdecillion", "decillion"),
