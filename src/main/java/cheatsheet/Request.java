@@ -7,16 +7,7 @@ public class Request {
     private NumberToWords numberToWordsConverter;
 
     public String getAnswer() {
-
-        try {
-            this.expressionResult = Calculator.evaluate(this.content).toString();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            return "Enter correct statement, please";
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            return "Fill the field, please";
-        }
+        this.expressionResult = Calculator.evaluate(this.content).toString();
         return this.expressionResult;
     }
 

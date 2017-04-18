@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 25.02.17.
  */
-public class UnitProcessor extends AbstractProcessor {
+class UnitProcessor extends AbstractProcessor {
 
     static private final String[] TOKENS = new String[] {
             "one", "two", "three", "four", "five", "six", "seven", "eight",
