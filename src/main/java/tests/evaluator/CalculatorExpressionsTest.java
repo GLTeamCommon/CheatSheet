@@ -6,9 +6,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by ERICK on 18.04.2017.
- */
 public class CalculatorExpressionsTest {
 
     Calculator calc;
