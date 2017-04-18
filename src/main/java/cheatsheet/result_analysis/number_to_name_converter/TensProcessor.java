@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 25.02.17.
  */
-class TensProcessor extends AbstractProcessor {
+public class TensProcessor extends AbstractProcessor {
 
     static private final String[] TOKENS = new String[] {
             "twenty", "thirty", "forty", "fifty", "sixty",

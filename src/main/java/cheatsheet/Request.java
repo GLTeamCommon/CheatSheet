@@ -1,13 +1,29 @@
 package cheatsheet;
 import cheatsheet.result_analysis.number_to_name_converter.NumberToWords;
 
+import java.text.ParseException;
+
 public class Request {
     private String content;
     private String expressionResult;
     private NumberToWords numberToWordsConverter;
+    private Calculator calculator;
+
+    {
+        calculator = new Calculator();
+    }
 
     public String getAnswer() {
-        this.expressionResult = Calculator.evaluate(this.content).toString();
+
+        try {
+            this.expressionResult = calculator.evaluate(this.content).toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            return "Enter correct statement, please";
+        } catch (NullPointerException e) {
+            return "Fill the field, please";
+        }
         return this.expressionResult;
     }
 

@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 25.02.17.
  */
-class HundredProcessor extends AbstractProcessor {
+public class HundredProcessor extends AbstractProcessor {
 
     private int EXPONENT = 2;
 
