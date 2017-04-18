@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 25.02.17.
  */
-class DefaultProcessor extends AbstractProcessor {
+public class DefaultProcessor extends AbstractProcessor {
 
     static private String MINUS = "minus";
     static private String UNION_AND = "and";

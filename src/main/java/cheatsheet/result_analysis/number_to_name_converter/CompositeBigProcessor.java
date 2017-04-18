@@ -3,7 +3,7 @@ package cheatsheet.result_analysis.number_to_name_converter;
 /**
  * Created by erick on 26.02.17.
  */
-class CompositeBigProcessor extends AbstractProcessor implements ScalesArray {
+public class CompositeBigProcessor extends AbstractProcessor implements ScalesArray {
 
     private HundredProcessor hundredProcessor = new HundredProcessor();
     private AbstractProcessor lowProcessor;
