@@ -18,13 +18,7 @@ public class NumberToWords<TYPE extends Number> implements ScalesArray {
     }
 
     public String getName() {
-        this.number.toUpperCase();
-        if (this.number.indexOf('E') != -1) {
-            processor = new ExponentProcessor();
-            return processor.getName(this.number);
-        } else {
-            processor = new DefaultProcessor();
-            return processor.getName(this.number);
-        }
+        processor = new DefaultProcessor();
+        return processor.getName(this.number);
     }
 }

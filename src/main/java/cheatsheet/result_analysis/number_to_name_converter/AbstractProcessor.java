@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by erick on 25.02.17.
  */
-abstract public class AbstractProcessor {
+abstract class AbstractProcessor {
     static protected final String SEPARATOR = " ";
     static protected final int NO_VALUE = -1;
 
