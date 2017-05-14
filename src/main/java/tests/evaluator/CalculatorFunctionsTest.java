@@ -112,10 +112,4 @@ public class CalculatorFunctionsTest {
         result = calc.evaluate("asin(cos(pi))");
         assertTrue(result == -1.5707963267948966);
     }
-
-    @Test
-    public void evaluateComplexExpression3() throws Exception {
-        result = calc.evaluate("2.5*e^(log(100))/cos(pi/3)");
-        assertTrue(result == 36.94528049465324);
-    }
 }
