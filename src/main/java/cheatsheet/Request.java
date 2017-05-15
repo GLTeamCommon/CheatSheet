@@ -20,11 +20,12 @@ public class Request {
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            return "Enter correct statement, please";
+            this.expressionResult = "Enter correct statement, please";
         } catch (NullPointerException e) {
-            return "Fill the field, please";
+            this.expressionResult = "Fill the field, please";
+        } finally {
+            return this.expressionResult;
         }
-        return this.expressionResult;
     }
 
     public String getNameOfNumber() {

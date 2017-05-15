@@ -9,13 +9,13 @@ import static org.junit.Assert.*;
 
 public class CalculatorFunctionsTest {
 
-    Calculator calc;
-    Double result;
-    private static final double DELTA = 1e-15;
+    private Calculator calc ;
+    private Double result;
+    private static final double DELTA = 1e-14;
 
     @Before
     public void setResult() {
-        result = new Double(0.0);
+        result = 0.0;
     }
 
     @Before
@@ -36,8 +36,14 @@ public class CalculatorFunctionsTest {
     }
 
     @Test
-    public void evaluateArcsin() throws Exception {
+    public void evaluateAsin() throws Exception {
         result = calc.evaluate("asin(0.5)");
+        assertEquals(result, 0.5235987755982989, DELTA);
+    }
+
+    @Test
+    public void evaluateArcsin() throws Exception {
+        result = calc.evaluate("arcsin(0.5)");
         assertEquals(result, 0.5235987755982989, DELTA);
     }
 
@@ -72,6 +78,12 @@ public class CalculatorFunctionsTest {
     }
 
     @Test
+    public void evaluateSqrt() throws Exception {
+        result = calc.evaluate("sqrt(4)");
+        assertEquals(result, 2.0, DELTA);
+    }
+
+    @Test
     public void evaluateExp() throws Exception {
         result = calc.evaluate("e^2");
         assertEquals(result, 7.3890560989306495, DELTA);
@@ -98,18 +110,18 @@ public class CalculatorFunctionsTest {
     @Test
     public void evaluateComplexExpression1() throws Exception {
         result = calc.evaluate("ln(e^(sin(pi/6)^(-1)))");
-        assertTrue(result == 2.0);
-    }
-
-    @Test
-    public void evaluateComplexExpression3() throws Exception {
-        result = calc.evaluate("2.5*e^(log(100))/cos(pi/3)");
-        assertTrue(result == 36.94528049465324);
+        assertEquals(result, 2.0, DELTA);
     }
 
     @Test
     public void evaluateComplexExpression2() throws Exception {
         result = calc.evaluate("asin(cos(pi))");
-        assertTrue(result == -1.5707963267948966);
+        assertEquals(result, -1.5707963267948966, DELTA);
+    }
+
+    @Test
+    public void evaluateComplexExpression3() throws Exception {
+        result = calc.evaluate("2.5*e^(log(100))/cos(pi/3)");
+        assertEquals(result, 36.94528049465324, DELTA);
     }
 }
