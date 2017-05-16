@@ -13,7 +13,7 @@ public class ExpressionParser {
 
     private static final String FUNC_LEFT_PART_PATTERN = "^\\s*[x-z]\\s*$";
     private static final String FUNC_RIGHT_PART_PATTERN = "^*[x-z]*$";
-    private static final String ARITHMETIC_PATTERN = "^[0-9]*\\s*[+*-/%^!]*$";
+    private static final String ARITHMETIC_PATTERN = "^\\s*-?[0-9]+\\s*[+*-/^!]*\\s*[0-9]*$";
 
     public ExpressionParser(String expression) {
         this.expression = expression;
@@ -46,6 +46,7 @@ public class ExpressionParser {
         if(this.expression.contains("=")) {
             splitedExpr = this.expression.split("=");
         } else {
+            System.out.println("No function");
             return false;
         }
         this.pattern = Pattern.compile(FUNC_LEFT_PART_PATTERN);

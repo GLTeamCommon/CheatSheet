@@ -8,6 +8,22 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 
+import net.sourceforge.jwbf.mediawiki.bots.MediaWikiBot;
+import info.bliki.wiki.model.WikiModel;
+import net.sourceforge.jwbf.core.contentRep.Article;
+
+import java.io.PrintWriter;
+
+import net.sourceforge.jwbf.core.actions.HttpActionClient;
+
+import org.jsoup.Jsoup;
+import org.jsoup.examples.HtmlToPlainText;
+
+import java.io.IOException;
+
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
 public class Calculator {
 	private static final String DECIMAL_ROUND_OF_FORMAT = "0.00000000000000";
 	private static final int[] PLOT_BUILD_BOUNDS = new int[]{-100, 100};
@@ -15,14 +31,21 @@ public class Calculator {
 	private final HashMap<Double, Double> coords = new HashMap<>();
 	private Double evaluateResult;
 
+    private int isAnswerExist = 0;
+    private int isNameOfNumberExist = 0;
+    private int isGraphicExist = 0;
+
 	public String processExpression(final String expression) throws IllegalArgumentException,
 			NullPointerException, ParseException {
 		ExpressionParser parser = new ExpressionParser(expression);
 		switch(parser.chooseType()) {
 			case ARITHMETIC_EXPRESSION:
 				evaluate(expression);
+                this.isAnswerExist = 1;
+                this.isNameOfNumberExist = 1;
 				return (this.evaluateResult.toString());
 			case TWO_VAR_FUNCTION:
+                this.isGraphicExist = 1;
 				buildPlot(expression);
 				return (this.coords.keySet().toString()
 						.concat("$")
@@ -31,8 +54,9 @@ public class Calculator {
 						.replace("[", "")
 						.replace("]", ""));
 			case TEXT:
-				//TODO:text processing...
-				return null;
+                this.isAnswerExist = 1;
+                System.out.println("try to get Wiki");
+				return getWiki(expression);
 			default:
 				return "Unsupported input";
 		}
@@ -80,4 +104,48 @@ public class Calculator {
 
 		return valueTwo;
 	}
+
+    private String getWiki(String findRequest) {
+        MediaWikiBot wikiBot = new MediaWikiBot("http://en.wikipedia.org/w/");
+        Article article = wikiBot.getArticle(findRequest);
+        wikiBot.login("evgenyzhurko", "evgenyzhurko123");
+        article.save();
+        try{
+            WikiModel wikiModel = new WikiModel("${image}", "${title}");
+            String html = wikiModel.render(article.getText());
+            
+            Document doc = Jsoup.parse(html);
+            for(Element e: doc.select("a"))
+                e.remove();
+            for(Element e: doc.select("table.toc"))
+                e.remove();
+            for(Element e: doc.select("ul"))
+                e.remove();
+            
+            doc.getElementById("See_also").remove();
+            doc.getElementById("References").remove();
+            doc.getElementById("External_links").remove();
+            
+            System.out.println("Fuck" + html);
+
+            html = doc.select("body").toString();
+            
+            return html;
+        } catch (IOException e) {
+            System.out.println("Pized na wiki");
+            return "Something went wrong...";
+        }
+    }
+
+    public int getIsAnswerExist() {
+        return this.isAnswerExist;
+    }
+
+    public int getIsNameOfNumberExist() {
+        return this.isNameOfNumberExist;
+    }
+
+    public int getGraphicExist() {
+        return this.isGraphicExist;
+    }
 }

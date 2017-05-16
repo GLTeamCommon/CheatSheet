@@ -152,33 +152,56 @@
 
 <body>
 <form class="form-wrapper">
-	<h1>Your formula: <br/><br/>
-	   <p th:text="${request.content}" />
-	       Answer: <br/><br/>
-	   <p th:text="${request.answer}" />
-	       Number name: <br/><br/>
-	   <p th:text="${request.nameOfNumber}" />
-	       Graphic:
+	    <h1>Your formula: <br/>
+      <p th:text="${request.content}" />
+        <div id="mydivtag1">
+        </div>
+        <script th:inline="javascript">
+          /*<![CDATA[*/
+          var pr = [[${request.answer}]] 
+          var x = parseInt([[${request.isAnswerExist}]]);
+          if (x == 1) {
+            var pr = [[${request.answer}]] 
+            document.getElementById('mydivtag1').innerHTML += 'Answer: <br/><p>' + pr.toString() + '</p>';
+          }
+          /*]]>*/
+        </script>
+	     <div id="mydivtag2">
+        </div>
+        <script th:inline="javascript">
+          /*<![CDATA[*/
+          var x = parseInt([[${request.isNameOfNumberExist}]]);
+          if (x == 1) {
+            var pr = [[${request.nameOfNumber}]] 
+            document.getElementById('mydivtag2').innerHTML += 'Number name: <br/><p>' + pr.toString() + '</p>';
+          }
+          /*]]>*/
+        </script>
+      <div id="mydivtag3">
+      </div>
       <div id="myDiv" style="width: 450px; height: 400px;">
       <script th:inline="javascript">
         /*<![CDATA[*/
-        var res = [[${request.answer}]]
-		var x = [];
-		var y = [];
-		var trace1;
-		if(res.contains("$")) {
-			x = res.split(["$"])[0].split([","]);
-			y = res.split(["$"])[1].split([","]);
-			trace1 = {
-				x: x,
-				y: y,
-				mode: 'markers',
-				marker: {
-					size: 16,
-					color: 'rgba(22, 245, 141, 1)' },
-			};
-		} else {
-        	trace1 = {
+        var rrr = parseInt([[${request.graphicExist}]]);
+        if (rrr == 1) {
+          document.getElementById('mydivtag3').innerHTML += 'Graphic: <br/>'
+          var res = [[${request.answer}]]
+		      var x = [];
+		      var y = [];
+		      var trace1;
+		      if(res.contains("$")) {
+			     x = res.split(["$"])[0].split([","]);
+			     y = res.split(["$"])[1].split([","]);
+			       trace1 = {
+				      x: x,
+				      y: y,
+				      mode: 'markers',
+				      marker: {
+					     size: 16,
+					     color: 'rgba(22, 245, 141, 1)' },
+			     };
+		      } else {
+        	 trace1 = {
             	x: [parseFloat(res)],
             	y: [0],
             	mode: 'markers',
@@ -186,7 +209,7 @@
             	  size: 16,
             	  color: 'rgba(22, 245, 141, 1)' },
         	};
-		}
+		    }
 
         var data = [ trace1 ];
 
@@ -196,6 +219,7 @@
         };
 
         Plotly.newPlot('myDiv', data, layout);
+      }
         /*]]>*/
       </script>
     </div>

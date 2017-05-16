@@ -2,6 +2,7 @@ package cheatsheet;
 import cheatsheet.result_analysis.number_to_name_converter.NumberToWords;
 
 import java.text.ParseException;
+import java.lang.NullPointerException;
 
 public class Request {
     private String content;
@@ -19,17 +20,21 @@ public class Request {
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            return "Enter correct statement, please";
+            e.printStackTrace();
         } catch (NullPointerException e) {
-            return "Fill the field, please";
+            e.printStackTrace();
         } finally {
             return this.expressionResult;
         }
     }
 
     public String getNameOfNumber() {
-        this.numberToWordsConverter = new NumberToWords(expressionResult);
-        return this.numberToWordsConverter.getName();
+        try {
+            this.numberToWordsConverter = new NumberToWords(expressionResult);
+            return this.numberToWordsConverter.getName();
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 
     public String getContent() {
@@ -38,5 +43,17 @@ public class Request {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public int getIsAnswerExist() {
+        return calculator.getIsAnswerExist();
+    }
+
+    public int getIsNameOfNumberExist() {
+        return calculator.getIsNameOfNumberExist();
+    }
+
+    public int getGraphicExist() {
+        return calculator.getGraphicExist();
     }
 }
