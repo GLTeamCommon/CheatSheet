@@ -158,12 +158,14 @@
         </div>
         <script th:inline="javascript">
           /*<![CDATA[*/
-          var pr = [[${request.answer}]] 
+          var pr = [[${request.answer}]] ;
           var x = parseInt([[${request.isAnswerExist}]]);
           if (x == 1) {
             var pr = [[${request.answer}]] 
             document.getElementById('mydivtag1').innerHTML += 'Answer: <br/><p>' + pr.toString() + '</p>';
-          }
+          } else {
+	  	alert("egor pidor");
+	  }
           /*]]>*/
         </script>
 	     <div id="mydivtag2">
