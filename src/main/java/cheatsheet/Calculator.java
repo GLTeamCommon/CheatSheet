@@ -24,6 +24,12 @@ import java.io.IOException;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.*;
+import java.net.*;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLPeerUnverifiedException;
+
 public class Calculator {
 	private static final String DECIMAL_ROUND_OF_FORMAT = "0.00000000000000";
 	private static final int[] PLOT_BUILD_BOUNDS = new int[]{-10, 10};
@@ -42,10 +48,12 @@ public class Calculator {
 			case ARITHMETIC_EXPRESSION:
 				evaluate(expression);
                 this.isAnswerExist = 1;
-                this.isNameOfNumberExist = 0;
                 this.isGraphicExist = 1;
+                this.isNameOfNumberExist = 1;
 				return (this.evaluateResult.toString());
 			case TWO_VAR_FUNCTION:
+                this.isAnswerExist = 0;
+                this.isNameOfNumberExist = 0;
                 this.isGraphicExist = 1;
 				buildPlot(expression);
 				return (this.coords.keySet().toString()
@@ -56,6 +64,8 @@ public class Calculator {
 						.replace("]", ""));
 			case TEXT:
                 this.isAnswerExist = 1;
+                this.isNameOfNumberExist = 0;
+                this.isGraphicExist = 0;
                 System.out.println("try to get Wiki");
 				return getWiki(expression);
 			default:
@@ -68,6 +78,7 @@ public class Calculator {
 		final ExtendedEvaluator eval = new ExtendedEvaluator();
 		final StaticVariableSet<Double> variables = new StaticVariableSet<Double>();
 		String variable;
+
 		if (expression.split("=")[1].toLowerCase().contains("x")) {
 			variable = "x";
 		} else if (expression.split("=")[1].toLowerCase().contains("y")){
@@ -106,36 +117,52 @@ public class Calculator {
 		return valueTwo;
 	}
 
-    private String getWiki(String findRequest) {
-        MediaWikiBot wikiBot = new MediaWikiBot("http://en.wikipedia.org/w/");
-        Article article = wikiBot.getArticle(findRequest);
-        wikiBot.login("evgenyzhurko", "evgenyzhurko123");
-        article.save();
-        try{
-            WikiModel wikiModel = new WikiModel("${image}", "${title}");
-            String html = wikiModel.render(article.getText());
+    public String getWiki(String findRequest) {
+        try {
+            HttpActionClient client = new HttpActionClient(new URL("https://en.wikipedia.org/w/"));
+            MediaWikiBot wikiBot = new MediaWikiBot(client);
+            Article article = wikiBot.getArticle(findRequest);
+            wikiBot.login("evgenyzhurko", "evgenyzhurko123");
+            article.save();
+            try{
+                WikiModel wikiModel = new WikiModel("${image}", "${title}");
+                String html = wikiModel.render(article.getText());
             
-            Document doc = Jsoup.parse(html);
-            for(Element e: doc.select("a"))
-                e.remove();
-            for(Element e: doc.select("table.toc"))
-                e.remove();
-            for(Element e: doc.select("ul"))
-                e.remove();
+                Document doc = Jsoup.parse(html);
+                for(Element e: doc.select("a"))
+                    e.remove();
+                for(Element e: doc.select("table.toc"))
+                    e.remove();
+                for(Element e: doc.select("ul"))
+                    e.remove();
             
-            doc.getElementById("See_also").remove();
-            doc.getElementById("References").remove();
-            doc.getElementById("External_links").remove();
+                doc.getElementById("See_also").remove();
+                doc.getElementById("References").remove();
+                doc.getElementById("External_links").remove();
             
-            System.out.println("Fuck" + html);
+                System.out.println("Fuck" + html);
 
-            html = doc.select("body").toString();
+                html = doc.select("body").toString();
             
-            return html;
-        } catch (IOException e) {
-            System.out.println("Pized na wiki");
-            return "Something went wrong...";
+                System.out.println(html);
+
+                if (html == null) {
+                    return "Something went wrong...";
+                }
+
+                return html;
+            } catch (IOException e) {
+                System.out.println("Pized na wiki");
+                return "Something went wrong...";
+            }
+        } catch (MalformedURLException e) {
+            System.out.println("URL problem");
+            return "Something went wrong";
+        } catch (Exception e) {
+            System.out.println("URL problem");
+            return "Something went wrong";
         }
+        
     }
 
     public int getIsAnswerExist() {

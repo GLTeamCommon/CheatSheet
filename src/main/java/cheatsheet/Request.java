@@ -3,6 +3,7 @@ import cheatsheet.result_analysis.number_to_name_converter.NumberToWords;
 
 import java.text.ParseException;
 import java.lang.NullPointerException;
+import java.lang.NumberFormatException;
 
 public class Request {
     private String content;
@@ -29,11 +30,14 @@ public class Request {
     }
 
     public String getNameOfNumber() {
+        String result = new String();
         try {
             this.numberToWordsConverter = new NumberToWords(expressionResult);
-            return this.numberToWordsConverter.getName();
-        } catch (NullPointerException e) {
-            return "";
+            result =  this.numberToWordsConverter.getName();
+        } catch (NumberFormatException e) {
+            result = "Pats";
+        } finally {
+            return result;
         }
     }
 
@@ -45,15 +49,15 @@ public class Request {
         this.content = content;
     }
 
-    public int getIsAnswerExist() {
-        return calculator.getIsAnswerExist();
+    public String getIsAnswerExist() {
+        return new Integer(calculator.getIsAnswerExist()).toString();
     }
 
-    public int getIsNameOfNumberExist() {
-        return calculator.getIsNameOfNumberExist();
+    public String getIsNameOfNumberExist() {
+        return new Integer(calculator.getIsNameOfNumberExist()).toString();
     }
 
-    public int getGraphicExist() {
-        return calculator.getGraphicExist();
+    public String getGraphicExist() {
+        return new Integer(calculator.getGraphicExist()).toString();
     }
 }
