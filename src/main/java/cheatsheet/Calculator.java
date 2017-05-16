@@ -26,7 +26,7 @@ import org.jsoup.nodes.Element;
 
 public class Calculator {
 	private static final String DECIMAL_ROUND_OF_FORMAT = "0.00000000000000";
-	private static final int[] PLOT_BUILD_BOUNDS = new int[]{-100, 100};
+	private static final int[] PLOT_BUILD_BOUNDS = new int[]{-10, 10};
 	private static final double PLOT_BUILD_STEP = 0.1;
 	private final HashMap<Double, Double> coords = new HashMap<>();
 	private Double evaluateResult;
