@@ -14,15 +14,14 @@ public class Request {
     }
 
     public String getAnswer() {
-
         try {
-            this.expressionResult = calculator.evaluate(this.content).toString();
+            this.expressionResult = calculator.processExpression(this.content);
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            this.expressionResult = "Enter correct statement, please";
+            return "Enter correct statement, please";
         } catch (NullPointerException e) {
-            this.expressionResult = "Fill the field, please";
+            return "Fill the field, please";
         } finally {
             return this.expressionResult;
         }

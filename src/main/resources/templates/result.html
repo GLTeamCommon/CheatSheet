@@ -7,8 +7,10 @@
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<link href="https://fonts.googleapis.com/css?family=Caveat+Brush" rel="stylesheet" />
     <style>
+	html, body {
+		height: 100%;
+	}
     body {
-	height: 100%;
         background: linear-gradient(to top left, powderblue, pink) no-repeat top center;                
         font: 12px 'Lucida sans', Arial, Helvetica;
         color: #333;
@@ -161,14 +163,30 @@
       <script th:inline="javascript">
         /*<![CDATA[*/
         var res = [[${request.answer}]]
-        var trace1 = {
-            x: [parseFloat(res)],
-            y: [0],
-            mode: 'markers',
-            marker: { 
-              size: 16,
-              color: 'rgba(22, 245, 141, 1)' },
-        };
+		var x = [];
+		var y = [];
+		var trace1;
+		if(res.contains("$")) {
+			x = res.split(["$"])[0].split([","]);
+			y = res.split(["$"])[1].split([","]);
+			trace1 = {
+				x: x,
+				y: y,
+				mode: 'markers',
+				marker: {
+					size: 16,
+					color: 'rgba(22, 245, 141, 1)' },
+			};
+		} else {
+        	trace1 = {
+            	x: [parseFloat(res)],
+            	y: [0],
+            	mode: 'markers',
+            	marker: {
+            	  size: 16,
+            	  color: 'rgba(22, 245, 141, 1)' },
+        	};
+		}
 
         var data = [ trace1 ];
 
