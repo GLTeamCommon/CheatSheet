@@ -13,19 +13,20 @@ public class ExpressionParser {
 
     private static final String FUNC_LEFT_PART_PATTERN = "^\\s*[x-z]\\s*$";
     private static final String FUNC_RIGHT_PART_PATTERN = "^*[x-z]*$";
-    private static final String ARITHMETIC_PATTERN = "^\\s*-?[0-9]+\\s*[+*-/^!]*\\s*[0-9]*$";
+    private static final String ARITHMETIC_PATTERN = "^\\s*[0-9]*\\s*[+*-/%^!]+\\s*[0-9]+$";
+    private static final String LETTERS_PATTERN = "^[A-Za-z ]*$";
 
     public ExpressionParser(String expression) {
         this.expression = expression;
     }
 
     public ExpressionTypes chooseType() {
-        if (isArithmeticExpression()) {
-            return ExpressionTypes.ARITHMETIC_EXPRESSION;
+        if (isWikiRequest()) {
+            return ExpressionTypes.TEXT;
         } else if (isMathFunction()) {
             return ExpressionTypes.TWO_VAR_FUNCTION;
         } else {
-            return ExpressionTypes.TEXT;
+            return ExpressionTypes.ARITHMETIC_EXPRESSION;
         }
     }
 
@@ -58,6 +59,18 @@ public class ExpressionParser {
             return true;
         } else {
             System.out.println("No function");
+            return false;
+        }
+    }
+
+    private boolean isWikiRequest() {
+        this.pattern = Pattern.compile(LETTERS_PATTERN);
+        this.matcher[0] = this.pattern.matcher(this.expression);
+        if (this.matcher[0].find()) {
+            System.out.println("Found wiki request");
+            return true;
+        } else {
+            System.out.println("No wiki request");
             return false;
         }
     }
