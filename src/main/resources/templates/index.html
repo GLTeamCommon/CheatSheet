@@ -160,7 +160,7 @@
         /*<![CDATA[*/
         var empty_form = function () {
             var txt = document.getElementById('data').value;
-            if(txt === "")
+            if(txt === "" || !ereg("^[а-яА-Яa-zA-Z]", txt))
             {
                 noGay_set();
                 return false;
