@@ -170,9 +170,9 @@
         </div>
         <script th:inline="javascript">
           /*<![CDATA[*/
-          var x = parseInt([[${request.isNameOfNumberExist}]]);
-          if (x == 1) {
-            var pr = [[${request.nameOfNumber}]] 
+          var zzz = parseInt([[${request.isNameOfNumberExist}]]);
+          if (zzz == 1) {
+            var pr = [[0]] //${request.nameOfNumber}
             document.getElementById('mydivtag2').innerHTML += 'Number name: <br/><p>' + pr.toString() + '</p>';
           }
           /*]]>*/
@@ -189,7 +189,8 @@
 		      var x = [];
 		      var y = [];
 		      var trace1;
-		      if(res.contains("$")) {
+          console.log(res);
+		      if(res.includes("$")) {
 			     x = res.split(["$"])[0].split([","]);
 			     y = res.split(["$"])[1].split([","]);
 			       trace1 = {

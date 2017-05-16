@@ -42,7 +42,8 @@ public class Calculator {
 			case ARITHMETIC_EXPRESSION:
 				evaluate(expression);
                 this.isAnswerExist = 1;
-                this.isNameOfNumberExist = 1;
+                this.isNameOfNumberExist = 0;
+                this.isGraphicExist = 1;
 				return (this.evaluateResult.toString());
 			case TWO_VAR_FUNCTION:
                 this.isGraphicExist = 1;
@@ -77,7 +78,7 @@ public class Calculator {
 		for (double step = PLOT_BUILD_BOUNDS[0]; step < PLOT_BUILD_BOUNDS[1];
 			 	step += PLOT_BUILD_STEP) {
 			variables.set(variable, step);
-			Double result = eval.evaluate(expression, variables);
+			Double result = eval.evaluate(expression.split("=")[1], variables);
 			this.coords.put(step, result);
 		}
 	}
