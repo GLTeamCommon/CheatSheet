@@ -122,8 +122,8 @@ public class Calculator {
             HttpActionClient client = new HttpActionClient(new URL("https://en.wikipedia.org/w/"));
             MediaWikiBot wikiBot = new MediaWikiBot(client);
             Article article = wikiBot.getArticle(findRequest);
-            wikiBot.login("evgenyzhurko", "evgenyzhurko123");
-            article.save();
+            //wikiBot.login("evgenyzhurko", "evgenyzhurko123");
+            //article.save();
             try{
                 WikiModel wikiModel = new WikiModel("${image}", "${title}");
                 String html = wikiModel.render(article.getText());
