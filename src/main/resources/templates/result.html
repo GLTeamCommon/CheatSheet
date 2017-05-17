@@ -154,44 +154,29 @@
 <form class="form-wrapper">
 	    <h1>Your formula: <br/>
       <p th:text="${request.content}" />
-        <div id="mydivtag1">
-        </div>
-        <script th:inline="javascript">
-          /*<![CDATA[*/
-          var pr = [[${request.answer}]] ;
-          var x = parseInt([[${request.isAnswerExist}]]);
-          if (x == 1) {
-            var pr = [[${request.answer}]] ;
-            document.getElementById('mydivtag1').innerHTML += 'Answer: <br/><p>' + pr.toString() + '</p>';
-          } else {
-	  	alert("egor pidor");
-	  }
-          /*]]>*/
-        </script>
-	     <div id="mydivtag2">
-        </div>
-        <script th:inline="javascript">
-          /*<![CDATA[*/
-          var zzz = parseInt([[${request.isNameOfNumberExist}]]);
-          if (zzz == 1) {
-            var pr = [[0]] //${request.nameOfNumber}
-            document.getElementById('mydivtag2').innerHTML += 'Number name: <br/><p>' + pr.toString() + '</p>';
-          }
-          /*]]>*/
-        </script>
-      <div id="mydivtag3">
-      </div>
-      <div id="myDiv" style="width: 450px; height: 400px;">
+        <div id="mydivtag1"></div>
+	      <div id="mydivtag2"></div>
+        <div id="mydivtag3"></div>
+        <div id="myDiv" style="width: 450px; height: 400px;">
       <script th:inline="javascript">
         /*<![CDATA[*/
-        var rrr = parseInt([[${request.graphicExist}]]);
-        if (rrr == 1) {
+        var res = [[${request.answer}]];
+        var x = [[${request.isAnswerExist}]];
+        if (x === "1") {
+          document.getElementById('mydivtag1').innerHTML += 'Answer: <br/><p>' + res.toString() + '</p>';
+        }
+        var x1 = [[${request.isNameOfNumberExist}]];
+        if (x1 === "1") {
+          var pr = [[${request.nameOfNumber}]]
+          console.log("555");
+          document.getElementById('mydivtag2').innerHTML += 'Number name: <br/><p>' + pr.toString() + '</p>';
+        }
+        var rrr = [[${request.graphicExist}]];
+        if (rrr === "1") {
           document.getElementById('mydivtag3').innerHTML += 'Graphic: <br/>'
-          var res = [[${request.answer}]];
 		      var x = [];
 		      var y = [];
 		      var trace1;
-          console.log(res);
 		      if(res.includes("$")) {
 			     x = res.split(["$"])[0].split([","]);
 			     y = res.split(["$"])[1].split([","]);
